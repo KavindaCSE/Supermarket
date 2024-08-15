@@ -83,12 +83,13 @@ class Table extends Component {
 
                         {/* Right side product details */}
                         <div className="content"  style={{width: "80%",position: "absolute", right: 0 ,marginLeft:"10%"}}>
-                        <div className="card" style={{width: "10rem", marginLeft:"400px" , marginTop:"15px" ,marginBottom:"15px"}}>
-                            <div className="card-body">
-                                <img src={Cart} className="card-img-top" alt= "cart image"/>
-                                <p className="card-text">No items : {this.state.no_of_item}</p>
-                            </div>
-                        </div>
+                        {this.props.user.post === "Customer" &&
+                            <div className="card" style={{width: "10rem", marginLeft:"400px" , marginTop:"15px" ,marginBottom:"15px"}}>
+                                <div className="card-body">
+                                    <img src={Cart} className="card-img-top" alt= "cart image"/>
+                                    <p className="card-text">No items : {this.state.no_of_item}</p>
+                                </div>
+                            </div>}
                         <div className="white-content">
                             <div className="goods-container">
                                 {this.state.products.map((product,index) => {
