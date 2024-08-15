@@ -1,0 +1,16 @@
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-family: 'Lucida Handwriting', cursive; /* Apply the specified font */
+    color: white !important;
+}
+
+.navbar-brand .brand-name {
+    margin-left: 10px;
+}
+
+.rounded-logo {
+    border-radius: 50%;
+}
+

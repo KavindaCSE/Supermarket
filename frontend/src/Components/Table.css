@@ -1,0 +1,21 @@
+/* Centering the buttons container within the goods-box */
+.goods-box {
+    width: calc(30% - 20px); /* Adjust width with margin */
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically if needed */
+}
+
+.goods-box .button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    margin-top: 10px; /* Space above buttons */
+}
+
+

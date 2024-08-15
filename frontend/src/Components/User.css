@@ -1,0 +1,64 @@
+/* UserAlt.css */
+
+/* Existing CSS styles */
+.user-info {
+    background-color: #007bff; /* Change background to a different color */
+    color: #ffffff; /* Set text color to white */
+    padding: 20px 30px; /* Adjust padding for better spacing */
+    margin-bottom: 20px; /* Adjust margin for spacing */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center align text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.user-info h3 {
+    font-size: 2rem; /* Larger font size */
+    font-weight: 700; /* Bold text */
+    margin: 0; /* Remove default margin */
+}
+
+.user-info span {
+    display: block; /* Display as block element */
+    font-size: 1.25rem; /* Font size for span */
+    margin-top: 10px; /* Space above span */
+    color: #f0db4f; /* Primary color for the span text */
+}
+
+/* New CSS styles */
+.new-style {
+    background-color: #343a40; /* Darker background color */
+    color: #ffffff; /* White text color */
+    padding: 15px 20px; /* Different padding */
+    border-radius: 8px; /* Slightly different border radius */
+    text-align: left; /* Align text to the left */
+    border: 2px solid #ffffff; /* Add a border */
+}
+
+.new-style h3 {
+    font-size: 1.75rem; /* Slightly smaller font size */
+    font-weight: 500; /* Normal weight */
+}
+
+.new-style span {
+    display: inline; /* Change display to inline */
+    font-size: 1rem; /* Smaller font size */
+    color: #ffc107; /* Different color for span text */
+}
+
+/* Centering the form box */
+.centered-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Centering the form box */
+.centered-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+
