@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React, { act, Component } from "react";
 import { Link } from "react-router-dom";
 import Cart from './assets/Cart.jpg'
 import './Table.css'; // Import CSS for table styling
@@ -9,8 +9,10 @@ class Table extends Component {
         products: [],
         allProducts:[],
         supplier:[],
+        afterOrder:[],
         activeIndex:0,
-        order:{},
+        changes:{},
+        order:{"no_of_items":0,"Total_price":0,"user_id":localStorage.getItem("id")},
         no_of_item:0,
         items:["All","Youghurt","Butter","Cheese","Biscuit","Chocolate","Soft_drink","Oats","Noodles","Ice_cream","Face_wash"]
     }
@@ -18,7 +20,7 @@ class Table extends Component {
     async componentDidMount() {
         try {
             const { data: products } = await axios.get('http://127.0.0.1:8000/products');
-            this.setState({ products :products, allProducts:products });
+            this.setState({ products :products, allProducts:products ,afterOrder:products});
         } catch (error) {
             alert("Error")
         }
@@ -37,40 +39,64 @@ class Table extends Component {
     handleClick = async(item,index) => {
         if (item === "All" && Object.keys(this.state.order).length === 0){
             this.setState({products : this.state.allProducts,activeIndex:0})
-        }else{
+        }else if (item === "All" ) {
+
+            this.setState({products:this.state.afterOrder,activeIndex:0})
+        }
+        else{
             const { data:products} = await axios.get(`http://127.0.0.1:8000/productusingname/${item}`) 
             this.setState({products,activeIndex:index})
         }
     }
 
-    handlecart = (id, index) => {
+    handlecart = (id, index,unit_price) => {
         let order = { ...this.state.order };
+        let changes = {...this.state.changes};
         let products = [...this.state.products]; 
         
         let product = { ...products[index] };     
         product.quantity_in_stock -= 1;
         products[index] = product;
 
-    
+        let afterOrder = this.state.afterOrder.map(product =>{
+            if (product.id === id){
+                product.quantity_in_stock -= 1
+                return product
+            }
+            return product
+        })
+
+
+        if (changes[String(id)]){
+            changes[String(id)] += 1
+        }else{
+            changes[String(id)] = 1
+        }
+        
         let no_of_item = this.state.no_of_item + 1;
     
-        if (order[id]) {
-            order[id] = order[id] + 1;
-        } else {
-            order[id] = 1;
-        }
-    
-        this.setState({ order, products, no_of_item});
+        order["no_of_items"] += 1
+        order["Total_price"] += unit_price
+        this.setState({ order, products, no_of_item,afterOrder,changes});
     }
     
+    handleOrder = async () => {
+        let changes = {"changes":this.state.changes}
+        await axios.post('http://127.0.0.1:8000/neworder',this.state.order)
+        await axios.put('http://127.0.0.1:8000/updateChanges',changes) 
+        window.location = '/home'       
+    }
     
 
     handleReset = () => {
-        this.setState({products : this.state.allProducts,no_of_item : 0,order:{}})
+        
+        this.setState({products : this.state.allProducts,no_of_item : 0,order:{"no_of_item":0,"Total_price":0,"user_id":localStorage.getItem("id")}})
+        window.location = '/home'
+        
     }
 
     render() {
-
+        
         return (
             <>
                 <div className="container">
@@ -99,8 +125,8 @@ class Table extends Component {
                                 <div className="card-body">
                                     <img src={Cart} className="card-img-top" alt= "cart image"/>
                                     <p className="card-text">No items : {this.state.no_of_item}</p>
-                                    <button type="button" className="btn btn-warning">Order</button>
-                                    <button style={{marginLeft:10}}onClick={this.handleReset} type="button" className="btn btn-danger">Reset</button>
+                                    <button onClick={this.handleOrder} type="button" className="btn btn-warning">Order</button>
+                                    <button style={{marginLeft:10}} onClick={this.handleReset} type="button" className="btn btn-danger">Reset</button>
                                 </div>
                             </div>}
                         <div className="white-content">
@@ -129,7 +155,7 @@ class Table extends Component {
                                                 )}
                                                 {this.props.user.post === "Customer" && (
                                                     <div className="button-container">
-                                                        <button onClick={() => this.handlecart(product.id,index)} type="button" className="btn btn-success">Add to Cart</button>
+                                                        <button onClick={() => this.handlecart(product.id,index,product.unit_price)} type="button" className="btn btn-success">Add to Cart</button>
                                                     </div>
                                                 )}
                                             </div>

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional,Dict
+
 
 class Supplier(BaseModel):
     name : str
@@ -14,11 +15,15 @@ class Products(BaseModel):
     unit_price : float
     revenue : float
     brand : str
-    supplier_id : int
+    supplier_id : int 
+
+
+class changesList(BaseModel):
+    changes: Dict[int, int]
 
 class orders(BaseModel):
     no_of_items : int
-    total_price : float
+    Total_price : float
     user_id : int
 
 

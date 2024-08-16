@@ -39,6 +39,7 @@ class Orders(Base):
     id =  Column(Integer,primary_key=True,index=True) 
     no_of_items = Column(Integer)
     Total_price = Column(Float)
-    user_id = Column(Integer,ForeignKey('users.id'))    
+    user_id = Column(Integer,ForeignKey('users.id'))  
+    status = Column(String)  
 
     users = relationship("Users",back_populates='orders')

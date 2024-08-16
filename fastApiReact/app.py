@@ -1,5 +1,5 @@
-from fastapi import FastAPI,Depends,HTTPException
-from components import model,schema,hashing,token,oauth2
+from fastapi import FastAPI,Depends
+from components import model,schema,hashing,token
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from components.database import engine,get_db
@@ -65,7 +65,7 @@ def adding_product(request:schema.Products,db:Session = Depends(get_db)):
     db.refresh(new_product)
     return new_product
 
-@app.get('/products',tags=["product"])
+@app.get('/products',tags=["products"])
 def get_all_products(db:Session = Depends(get_db)):
     products = db.query(model.Products).all()    
     return products
@@ -78,7 +78,17 @@ def get_product(id : int,db:Session = Depends(get_db)):
 @app.get('/productusingname/{name}',tags=["product"])
 def get_product(name : str,db:Session = Depends(get_db)):
     product = db.query(model.Products).filter(model.Products.name == name).all()
-    return product       
+    return product 
+
+@app.put('/updateChanges',tags=["products"])
+def update_all_products(request:schema.changesList,db:Session = Depends(get_db)):
+    changes = request.changes
+    print(changes)
+    for id,quantity in changes.items():
+        product = db.query(model.Products).filter(model.Products.id == id).first()
+        product.quantity_in_stock -= quantity
+    db.commit()
+    return "success"       
 
 @app.get('/productcollection',tags=["product"])   
 def high_revenue_products(db:Session = Depends(get_db)):
@@ -167,6 +177,11 @@ def getsupplier(product_id: int, db: Session = Depends(get_db)):
     else:
         return {"error": "Product not found"}
     
-# @app.post('/neworder',tags=["orders"])
-# def neworder()    
+@app.post('/neworder',tags=["orders"])
+def neworder(request : schema.orders , db:Session = Depends(get_db)):
+    new_order = model.Orders(no_of_items = request.no_of_items, Total_price = request.Total_price , user_id = request.user_id,status="pending") 
+    db.add(new_order)
+    db.commit()
+    
+    return "Success"
    
