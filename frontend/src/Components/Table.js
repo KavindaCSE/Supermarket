@@ -35,7 +35,7 @@ class Table extends Component {
     }
     
     handleClick = async(item,index) => {
-        if (item === "All" && this.state.order.leg){
+        if (item === "All" && Object.keys(this.state.order).length === 0){
             this.setState({products : this.state.allProducts,activeIndex:0})
         }else{
             const { data:products} = await axios.get(`http://127.0.0.1:8000/productusingname/${item}`) 
@@ -46,11 +46,11 @@ class Table extends Component {
     handlecart = (id, index) => {
         let order = { ...this.state.order };
         let products = [...this.state.products]; 
-        let product = { ...products[index] }; 
-    
-       
+        
+        let product = { ...products[index] };     
         product.quantity_in_stock -= 1;
-        products[index] = product; 
+        products[index] = product;
+
     
         let no_of_item = this.state.no_of_item + 1;
     
@@ -60,7 +60,7 @@ class Table extends Component {
             order[id] = 1;
         }
     
-        this.setState({ order, products, no_of_item });
+        this.setState({ order, products, no_of_item});
     }
     
     

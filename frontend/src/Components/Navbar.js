@@ -35,7 +35,7 @@ function Navbar(props) {
                             </li>  
                         )
                         }
-                        {props.user.post === "User"  || props.user.post === "Admin"  && (
+                        {(props.user.post === "User" || props.user.post === "Admin")  && (
                             <>
                             <li className="nav-item">
                                 <NavLink to='/addproduct' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
