@@ -35,7 +35,7 @@ class Table extends Component {
     }
     
     handleClick = async(item,index) => {
-        if (item === "All" && this.state.order === 0){
+        if (item === "All" && this.state.order.leg){
             this.setState({products : this.state.allProducts,activeIndex:0})
         }else{
             const { data:products} = await axios.get(`http://127.0.0.1:8000/productusingname/${item}`) 
