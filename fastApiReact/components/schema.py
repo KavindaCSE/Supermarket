@@ -16,6 +16,11 @@ class Products(BaseModel):
     brand : str
     supplier_id : int
 
+class orders(BaseModel):
+    no_of_items : int
+    total_price : float
+    user_id : int
+
 
 class Users(BaseModel):
     name:str

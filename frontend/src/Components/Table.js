@@ -35,7 +35,7 @@ class Table extends Component {
     }
     
     handleClick = async(item,index) => {
-        if (item === "All"){
+        if (item === "All" && this.state.order === 0){
             this.setState({products : this.state.allProducts,activeIndex:0})
         }else{
             const { data:products} = await axios.get(`http://127.0.0.1:8000/productusingname/${item}`) 
@@ -43,23 +43,34 @@ class Table extends Component {
         }
     }
 
-    handlecart = (id,index) =>{
-
-        let order = {...this.state.order}
-        let products = [...this.state.products]
-        let no_of_item = this.state.no_of_item + 1 
-
-        if (order[id]){
-            order[id] = order[id]+ 1
-        }else{
-            order[id] = 1
+    handlecart = (id, index) => {
+        let order = { ...this.state.order };
+        let products = [...this.state.products]; 
+        let product = { ...products[index] }; 
+    
+       
+        product.quantity_in_stock -= 1;
+        products[index] = product; 
+    
+        let no_of_item = this.state.no_of_item + 1;
+    
+        if (order[id]) {
+            order[id] = order[id] + 1;
+        } else {
+            order[id] = 1;
         }
+    
+        this.setState({ order, products, no_of_item });
+    }
+    
+    
 
-        products[index]["quantity_in_stock"] -= 1 
-        this.setState({order,products,no_of_item})
+    handleReset = () => {
+        this.setState({products : this.state.allProducts,no_of_item : 0,order:{}})
     }
 
     render() {
+
         return (
             <>
                 <div className="container">
@@ -73,7 +84,7 @@ class Table extends Component {
                                         className={`list-group-item ${this.state.activeIndex === index ? "active" : ""}`} 
                                         aria-current="true" 
                                         onClick={() => this.handleClick(item, index)}
-                                        style={{ cursor: "pointer" }} // Optional: Add pointer cursor for better UX
+                                        style={{ cursor: "pointer" }} 
                                     >
                                         {item}
                                     </li>
@@ -84,10 +95,12 @@ class Table extends Component {
                         {/* Right side product details */}
                         <div className="content"  style={{width: "80%",position: "absolute", right: 0 ,marginLeft:"10%"}}>
                         {this.props.user.post === "Customer" &&
-                            <div className="card" style={{width: "10rem", marginLeft:"400px" , marginTop:"15px" ,marginBottom:"15px"}}>
+                            <div className="card" style={{width: "15rem", marginLeft:"400px" , marginTop:"15px" ,marginBottom:"15px"}}>
                                 <div className="card-body">
                                     <img src={Cart} className="card-img-top" alt= "cart image"/>
                                     <p className="card-text">No items : {this.state.no_of_item}</p>
+                                    <button type="button" className="btn btn-warning">Order</button>
+                                    <button style={{marginLeft:10}}onClick={this.handleReset} type="button" className="btn btn-danger">Reset</button>
                                 </div>
                             </div>}
                         <div className="white-content">

@@ -30,4 +30,15 @@ class Users(Base):
     name = Column(String)
     email = Column(String)
     post = Column(String)
-    password = Column(String)    
+    password = Column(String) 
+
+    orders = relationship("Orders",back_populates='users')
+
+class Orders(Base):
+    __tablename__ = "orders"
+    id =  Column(Integer,primary_key=True,index=True) 
+    no_of_items = Column(Integer)
+    Total_price = Column(Float)
+    user_id = Column(Integer,ForeignKey('users.id'))    
+
+    users = relationship("Users",back_populates='orders')

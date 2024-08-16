@@ -166,4 +166,7 @@ def getsupplier(product_id: int, db: Session = Depends(get_db)):
         return supplier
     else:
         return {"error": "Product not found"}
+    
+# @app.post('/neworder',tags=["orders"])
+# def neworder()    
    
