@@ -14,6 +14,8 @@ class Products(Base):
     supplier_id = Column(Integer, ForeignKey('suppliers.id'))
     supplier = relationship("Suppliers", back_populates='products')
 
+    reviews = relationship("Reviews",back_populates='products')
+
 class Suppliers(Base):
     __tablename__ = "suppliers"
     id = Column(Integer, primary_key=True, index=True)
@@ -43,3 +45,12 @@ class Orders(Base):
     status = Column(String)  
 
     users = relationship("Users",back_populates='orders')
+
+class Reviews(Base):
+    __tablename__ = "reviews"
+    id = Column(Integer,primary_key=True,index=True)
+    product_id = Column(Integer,ForeignKey('products.id')) 
+    status = Column(String)
+    feedback = Column(String) 
+    
+    products = relationship("Products",back_populates='reviews')

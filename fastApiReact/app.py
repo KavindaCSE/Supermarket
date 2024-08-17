@@ -196,4 +196,14 @@ def get_all_orders(db:Session = Depends(get_db)):
     orders = db.query(model.Orders).all()
     return orders
 
-   
+@app.post('/predictReview',tags=["Reviews"])
+def review(request : schema.review,db:Session = Depends(get_db)):
+    preprocessed_data = preprocessing(request.feedback)
+    vectorized_data = vectorizer(preprocessed_data)
+    prediction = predict(vectorized_data)
+
+    new_review = model.Reviews(product_id = request.product_id,status = prediction,feedback = request.feedback)
+    db.add(new_review)
+    db.commit()
+
+    return prediction

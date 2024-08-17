@@ -62,3 +62,8 @@ class getUser(BaseModel):
     post:str
     class Config():
         orm_ode = True        
+
+class review(BaseModel):
+    product_id : int
+    feedback : str
+           
