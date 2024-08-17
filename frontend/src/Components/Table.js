@@ -161,6 +161,7 @@ class Table extends Component {
                                                 {this.props.user.post === "Customer" && (
                                                     <div className="button-container">
                                                         <button onClick={() => this.handlecart(product.id,index,product.unit_price)} type="button" className="btn btn-success">Add to Cart</button>
+                                                        <Link to={`/feedback/${product.id}`}><button style={{marginLeft:"10px"}} type="button" className="btn btn-warning">Review</button></Link>
                                                     </div>
                                                 )}
                                             </div>

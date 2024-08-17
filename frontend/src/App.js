@@ -41,7 +41,7 @@ class App extends Component {
           <Route path='/updatesupplier/:id' element={<UpdateSuppliers/>}/>
           <Route path='/addsupplier' element={<AddSupplier />} />
           <Route path='/orders' element={<Orders/>}/>
-          <Route path='/feedback' element={<Feedback/>}/>
+          <Route path='/feedback/:id' element={<Feedback/>}/>
         </Routes>
       </>
     );

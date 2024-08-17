@@ -74,7 +74,7 @@ function Navbar(props) {
                             </>    
                         }
                         <li className="nav-item">
-                            <NavLink to='/feedback' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                            <NavLink to='/feedback/-1' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                                 Your Feedback
                             </NavLink>
                         </li> 
