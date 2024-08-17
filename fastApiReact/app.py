@@ -4,6 +4,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from components.database import engine,get_db
 from fastapi.middleware.cors import CORSMiddleware 
+from Review_Products.helper import preprocessing,vectorizer,predict
 
 app = FastAPI()
 
