@@ -203,6 +203,12 @@ def review(request : schema.review,db:Session = Depends(get_db)):
     prediction = predict(vectorized_data)
 
     new_review = model.Reviews(product_id = request.product_id,status = prediction,feedback = request.feedback)
+    if (request.product_id != -1):
+        product = db.query(model.Products).filter(model.Products.id == request.product_id).first()
+        if(prediction == "Positive"):
+            product.revenue += 0.002
+        else:
+            product.revenue -= 0.002     
     db.add(new_review)
     db.commit()
 
