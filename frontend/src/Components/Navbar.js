@@ -9,6 +9,11 @@ function Navbar(props) {
                 <div className="collapse navbar-collapse" id="navbar">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
+                            <NavLink to='/' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                                Home
+                            </NavLink>
+                        </li>                         
+                        <li className="nav-item">
                             <NavLink to='/home' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                                 Products
                             </NavLink>
@@ -65,9 +70,14 @@ function Navbar(props) {
                                 <NavLink to='/logout' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                                     Log out
                                 </NavLink>
-                            </li>                                
+                                </li>                                
                             </>    
                         }
+                        <li className="nav-item">
+                            <NavLink to='/feedback' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                                Your Feedback
+                            </NavLink>
+                        </li> 
                     </ul>
                 </div>
             </div>

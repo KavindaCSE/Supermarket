@@ -14,6 +14,7 @@ import User from './Components/User';
 import Suppliers from './Components/Suppliers';
 import UpdateSuppliers from './Components/UpdateSuppliers';
 import Orders from './Components/Orders';
+import Feedback from './Components/Coustomer_feedbacks';
 
 
 class App extends Component {
@@ -39,7 +40,8 @@ class App extends Component {
           <Route path='/addproduct' element={<AddProduct />} />
           <Route path='/updatesupplier/:id' element={<UpdateSuppliers/>}/>
           <Route path='/addsupplier' element={<AddSupplier />} />
-          <Route path='orders' element={<Orders/>}/>
+          <Route path='/orders' element={<Orders/>}/>
+          <Route path='/feedback' element={<Feedback/>}/>
         </Routes>
       </>
     );
