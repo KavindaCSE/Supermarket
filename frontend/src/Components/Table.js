@@ -45,7 +45,12 @@ class Table extends Component {
         }
         else{
             const { data:products} = await axios.get(`http://127.0.0.1:8000/productusingname/${item}`) 
-            this.setState({products,activeIndex:index})
+            if(Object.keys(this.state.order).length){
+                this.setState({products,activeIndex:index})
+                //this has to be change
+            }else{
+                this.setState({products,activeIndex:index})
+            }
         }
     }
 

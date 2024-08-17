@@ -13,6 +13,7 @@ import Logout from './Components/Logout';
 import User from './Components/User';
 import Suppliers from './Components/Suppliers';
 import UpdateSuppliers from './Components/UpdateSuppliers';
+import Orders from './Components/Orders';
 
 
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
           <Route path='/addproduct' element={<AddProduct />} />
           <Route path='/updatesupplier/:id' element={<UpdateSuppliers/>}/>
           <Route path='/addsupplier' element={<AddSupplier />} />
+          <Route path='orders' element={<Orders/>}/>
         </Routes>
       </>
     );

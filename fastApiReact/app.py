@@ -184,4 +184,15 @@ def neworder(request : schema.orders , db:Session = Depends(get_db)):
     db.commit()
     
     return "Success"
+
+@app.get('/ordersOfuser/{id}',tags=["orders"])
+def get_relevant(id:int,db:Session = Depends(get_db)):
+    orders = db.query(model.Orders).filter(model.Orders.user_id == id).all()
+    return orders
+
+@app.get('/getAllorders',tags=["orders"])
+def get_all_orders(db:Session = Depends(get_db)):
+    orders = db.query(model.Orders).all()
+    return orders
+
    

@@ -46,20 +46,10 @@ function Navbar(props) {
                                 <NavLink to='/addsupplier' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                                     Add Supplier
                                 </NavLink>
-                            </li>                                                       
-                            <li className="nav-item" >
-                                <NavLink to='/profile' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                                    {props.user.username}
-                                </NavLink>
-                            </li>
-                            <li className="nav-item" >
-                                <NavLink to='/logout' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                                    Log out
-                                </NavLink>
                             </li>
                             </>
                         )}
-                        {props.user.post === "Customer" &&
+                        {props.user.username &&
                             <>
                                 <li className="nav-item" >
                                     <NavLink to='/profile' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
@@ -67,8 +57,8 @@ function Navbar(props) {
                                     </NavLink>
                                 </li>                        
                                 <li className="nav-item" >
-                                    <NavLink to='/order' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                                        Order
+                                    <NavLink to='/orders' className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                                        Orders
                                     </NavLink>
                                 </li>
                                 <li className="nav-item" >
