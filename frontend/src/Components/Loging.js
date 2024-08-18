@@ -59,12 +59,14 @@ function Login() {
                             name="password"
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    {(account.username && account.password) &&
+                        <button type="submit" className="btn btn-primary">Login</button>
+                    }
                 </form>
             </div>
-            <div className="login-image">
-                <img src={image} alt="Grocery Store Sale" />
-            </div>
+                <div className="login-image">
+                    <img src={image} alt="Grocery Store Sale" />
+                </div>            
         </div>
     );
 }

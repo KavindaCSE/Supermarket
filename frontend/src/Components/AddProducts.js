@@ -33,18 +33,24 @@ class AddProduct extends Component {
             reactS3.uploadFile(this.state.image,this.state.image.name.replace('.jpg', ''))
             .then(data => {
                 console.log('Upload Response:', data);
-                // Check if the response is ok
-                if (data.status >= 200 && data.status < 300) {
-                    console.log('File uploaded successfully:', data);
-                } else {
-                    console.error('Upload failed:', data);
-                }
             })
             .catch(error => {
                 console.error('Error during upload:', error);
             });
             
-            // window.location = '/addproduct';
+            let product = {
+                name: "",
+                quantity_in_stock: 0,
+                quantity_sold: 0,
+                unit_price: 0,
+                brand: "",
+                revenue: 0,
+                supplier_id: 0
+            }
+
+            let image = null
+
+            this.setState({image,product})
 
         } catch (error) {
             console.error("There was an error!", error);

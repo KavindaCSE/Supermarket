@@ -69,7 +69,9 @@ class SingIn extends Component {
                             />
                         </div>
                         <div className="buttons">
-                            <button type="submit" className="btn btn-primary">SignIn</button>
+                            {(this.state.account.name && this.state.account.email && this.state.account.password) &&
+                                <button type="submit" className="btn btn-primary">SignIn</button>
+                            }    
                             <button type="reset" className="btn btn-secondary" onClick={this.handle_reset}>Reset</button>
                         </div>
                     </form>

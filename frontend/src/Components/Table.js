@@ -14,7 +14,7 @@ class Table extends Component {
         changes:{},
         order:{"no_of_items":0,"Total_price":0,"user_id":localStorage.getItem("id"),"status":"Pending"},
         no_of_item:0,
-        items:["All","Youghurt","Butter","Cheese","Biscuit","Chocolate","Soft_drink","Oats","Noodles","Ice_cream","Face_wash","Powder"]
+        items:["All","Youghurt","Butter","Cheese","Biscuit","Chocolate","Soft_drink","Oats","Noodles","Ice_cream","Face_wash","Powder","Sauce"]
     }
 
     async componentDidMount() {
