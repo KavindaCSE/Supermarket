@@ -9,7 +9,7 @@ class Suppliers extends Component {
     };
 
     async componentDidMount() {
-        const { data: suppliers } = await axios.get("http://127.0.0.1:8000/getsuppliers");
+        const { data: suppliers } = await axios.get("/getsuppliers");
         this.setState({ suppliers });
     }
 

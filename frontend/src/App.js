@@ -15,6 +15,9 @@ import Suppliers from './Components/Suppliers';
 import UpdateSuppliers from './Components/UpdateSuppliers';
 import Orders from './Components/Orders';
 import Feedback from './Components/Coustomer_feedbacks';
+import axios from 'axios'
+
+axios.defaults.baseURL = `http://${window.location.hostname}:8000`;
 
 
 class App extends Component {

@@ -9,14 +9,14 @@ class UpdateSupplier extends Component {
     }
 
     async componentDidMount() {
-        let { data: suppliers } = await axios.get(`http://127.0.0.1:8000/getsupplier/${this.props.id}`);
-        let { data: products } = await axios.get(`http://127.0.0.1:8000/getproductbysupplier/${this.props.id}`);
+        let { data: suppliers } = await axios.get(`/getsupplier/${this.props.id}`);
+        let { data: products } = await axios.get(`/getproductbysupplier/${this.props.id}`);
         this.setState({ suppliers, products });
     }
 
     handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
-        await axios.put(`http://127.0.0.1:8000/updatesupplier/${this.props.id}`, this.state.suppliers);
+        await axios.put(`/updatesupplier/${this.props.id}`, this.state.suppliers);
         window.location = '/suppliers';
     }
 

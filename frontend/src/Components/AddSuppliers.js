@@ -15,7 +15,7 @@ class AddSupplier extends Component {
     submit = async (e) => {
         
         e.preventDefault();
-        await axios.post('http://127.0.0.1:8000/supplier', this.state.product);
+        await axios.post('/supplier', this.state.product);
         window.location = '/addsupplier';
     };
 

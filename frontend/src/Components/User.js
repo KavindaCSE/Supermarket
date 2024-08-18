@@ -19,7 +19,7 @@ class User extends Component {
 
     confirmPW = async (e) =>{
         e.preventDefault();
-        let token = await axios.post('http://127.0.0.1:8000/login',new URLSearchParams(this.state.account))
+        let token = await axios.post('/login',new URLSearchParams(this.state.account))
         if (token.data === "Incorrect password" || token.data === "No such user"){
             alert(token.data)
         }else{
@@ -47,12 +47,12 @@ class User extends Component {
         e.preventDefault();
 
         if (this.state.newpw){
-            await axios.post('http://127.0.0.1:8000/newpw',this.state.account)
+            await axios.post('/newpw',this.state.account)
             alert("Password is successfully changed")
 
         }else{
 
-            await axios.put(`http://127.0.0.1:8000/updateUser/${this.state.user.id}`,this.state.user)
+            await axios.put(`/updateUser/${this.state.user.id}`,this.state.user)
             localStorage.setItem("id", this.state.user.id);      
             localStorage.setItem("name", this.state.user.name);  
             localStorage.setItem("email", this.state.user.email);

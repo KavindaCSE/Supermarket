@@ -10,13 +10,13 @@ function Login() {
 
     let handle_submit = async (e) => {
         e.preventDefault();
-        let token = await axios.post('http://127.0.0.1:8000/login',new URLSearchParams(account))
+        let token = await axios.post('/login',new URLSearchParams(account))
         console.log(token)
 
         if (token.data === "Incorrect password" || token.data === "No such user") {
             alert(token.data);
         } else {
-            let user = await axios.get('http://127.0.0.1:8000/getuser'+'/'+account.username)
+            let user = await axios.get('/getuser'+'/'+account.username)
             localStorage.setItem("id",user.data.id);
             localStorage.setItem("name", user.data.name);
             localStorage.setItem("email", user.data.email);

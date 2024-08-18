@@ -19,7 +19,7 @@ class Table extends Component {
 
     async componentDidMount() {
         try {
-            const { data: products } = await axios.get('http://127.0.0.1:8000/products');
+            const { data: products } = await axios.get('/products');
             this.setState({ products :products, allProducts:products ,afterOrder:products});
         } catch (error) {
             alert("Error")
@@ -30,7 +30,7 @@ class Table extends Component {
         try {
             let products = this.state.products.filter(product => product.id !== id);
             this.setState({ products });
-            await axios.delete(`http://127.0.0.1:8000/product/${id}`);
+            await axios.delete(`/product/${id}`);
         } catch (error) {
             alert("Error")
         }
@@ -44,7 +44,7 @@ class Table extends Component {
             this.setState({products:this.state.afterOrder,activeIndex:0})
         }
         else{
-            const { data:products} = await axios.get(`http://127.0.0.1:8000/productusingname/${item}`) 
+            const { data:products} = await axios.get(`/productusingname/${item}`) 
             if(Object.keys(this.state.order).length){
                 this.setState({products,activeIndex:index})
                 //this has to be change
@@ -87,8 +87,8 @@ class Table extends Component {
     
     handleOrder = async () => {
         let changes = {"changes":this.state.changes}
-        await axios.post('http://127.0.0.1:8000/neworder',this.state.order)
-        await axios.put('http://127.0.0.1:8000/updateChanges',changes) 
+        await axios.post('/neworder',this.state.order)
+        await axios.put('/updateChanges',changes) 
         window.location = '/home'       
     }
     

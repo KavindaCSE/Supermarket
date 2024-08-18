@@ -20,8 +20,8 @@ class Updateproduct extends Component {
     };
 
     async componentDidMount() {
-        let get_product = await axios.get('http://127.0.0.1:8000/product/' + this.props.id);
-        let {data:supplier} = await axios.get(`http://127.0.0.1:8000/getsupplierbyproduct/${this.props.id}`)
+        let get_product = await axios.get('/product/' + this.props.id);
+        let {data:supplier} = await axios.get(`/getsupplierbyproduct/${this.props.id}`)
         let product = {
             id: get_product.data.id,
             name: get_product.data.name,
@@ -37,7 +37,7 @@ class Updateproduct extends Component {
 
     submit = async (e) => {
         e.preventDefault();
-        await axios.put('http://127.0.0.1:8000/product/' + this.props.id, this.state.product);
+        await axios.put('/product/' + this.props.id, this.state.product);
         window.location = `/update/${this.state.product.id}`;
     };
 

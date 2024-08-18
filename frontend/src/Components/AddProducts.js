@@ -20,7 +20,7 @@ class AddProduct extends Component {
     submit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://127.0.0.1:8000/product', this.state.product);
+            await axios.post('/product', this.state.product);
 
             const reactS3 = new S3 ({
                 accessKeyId: "AKIAW5BDQYBALMGCQ2OQ",

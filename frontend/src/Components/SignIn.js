@@ -10,7 +10,7 @@ class SingIn extends Component {
 
     handle_submit = async (e) => {
         e.preventDefault();
-        await axios.post('http://127.0.0.1:8000/SignIn',this.state.account)
+        await axios.post('/SignIn',this.state.account)
         localStorage.setItem("name",this.state.account.name)
         localStorage.setItem("email",this.state.account.email)
         localStorage.setItem("post",this.state.account.post)

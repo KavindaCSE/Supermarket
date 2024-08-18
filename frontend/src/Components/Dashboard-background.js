@@ -11,7 +11,7 @@ class Background extends Component {
     }
 
     async componentDidMount(){
-        let {data:products} = await axios.get('http://127.0.0.1:8000/productcollection')
+        let {data:products} = await axios.get('/productcollection')
         this.setState({products})
         console.log()        
     }

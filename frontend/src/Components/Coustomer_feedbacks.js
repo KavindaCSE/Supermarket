@@ -9,7 +9,7 @@ function Feedback(){
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('http://127.0.0.1:8000/predictReview', feedback);
+        await axios.post('/predictReview', feedback);
         window.location = `/feedback/${feedback["product_id"]}`
     }
 

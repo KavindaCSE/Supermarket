@@ -12,10 +12,10 @@ class Orders extends Component{
 
     async componentDidMount () {
         if(this.state.post === "Admin" || this.state.post === "User"){
-            let {data : orders} = await axios.get('http://127.0.0.1:8000/getAllorders')
+            let {data : orders} = await axios.get('/getAllorders')
             this.setState({orders})
         }else{
-            let {data : orders} = await axios.get(`http://127.0.0.1:8000/ordersOfuser/${this.state.id}`)
+            let {data : orders} = await axios.get(`/ordersOfuser/${this.state.id}`)
             this.setState({orders})
         }
     }
@@ -24,7 +24,7 @@ class Orders extends Component{
         let orders = [...this.state.orders]
         orders[index]["status"] = "Completed"
         this.setState({orders})
-        await axios.put(`http://127.0.0.1:8000/updateOrder/${id}`)
+        await axios.put(`/updateOrder/${id}`)
     }
 
     render(){
