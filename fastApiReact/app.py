@@ -5,6 +5,13 @@ from sqlalchemy.orm import Session
 from components.database import engine,get_db
 from fastapi.middleware.cors import CORSMiddleware 
 from Review_Products.helper import preprocessing,vectorizer,predict
+from dotenv import load_dotenv
+
+import boto3
+import os
+
+load_dotenv()
+
 
 app = FastAPI()
 
@@ -15,6 +22,8 @@ model.Base.metadata.create_all(bind=engine)
 origins = [
     'http://localhost:3000'
 ]
+
+
 
 #add midldleware
 app.add_middleware(
@@ -180,7 +189,7 @@ def getsupplier(product_id: int, db: Session = Depends(get_db)):
     
 @app.post('/neworder',tags=["orders"])
 def neworder(request : schema.orders , db:Session = Depends(get_db)):
-    new_order = model.Orders(no_of_items = request.no_of_items, Total_price = request.Total_price , user_id = request.user_id,status="pending") 
+    new_order = model.Orders(no_of_items = request.no_of_items, Total_price = request.Total_price , user_id = request.user_id,status=request.status) 
     db.add(new_order)
     db.commit()
     
@@ -195,6 +204,13 @@ def get_relevant(id:int,db:Session = Depends(get_db)):
 def get_all_orders(db:Session = Depends(get_db)):
     orders = db.query(model.Orders).all()
     return orders
+
+@app.put('/updateOrder/{id}',tags=["orders"])
+def update_order(id : int ,db:Session = Depends(get_db)):
+    order = db.query(model.Orders).filter(model.Orders.id == id).first()
+    order.status = "Completed"
+    db.commit()
+    return "successful"
 
 @app.post('/predictReview',tags=["Reviews"])
 def review(request : schema.review,db:Session = Depends(get_db)):
@@ -213,3 +229,6 @@ def review(request : schema.review,db:Session = Depends(get_db)):
     db.commit()
 
     return prediction
+
+
+

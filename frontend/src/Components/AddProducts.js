@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import './AddProduct.css';
+import S3 from 'react-aws-s3-typescript'
 
 class AddProduct extends Component {
     state = {
@@ -12,17 +13,43 @@ class AddProduct extends Component {
             brand: "",
             revenue: 0,
             supplier_id: 0
-        }
+        },
+        image:null
     };
 
     submit = async (e) => {
         e.preventDefault();
         try {
             await axios.post('http://127.0.0.1:8000/product', this.state.product);
-            window.location = '/addproduct';
+
+            const reactS3 = new S3 ({
+                accessKeyId: "AKIAW5BDQYBALMGCQ2OQ",
+                secretAccessKey:"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",
+                bucketName:"my-supermarket-items",
+                region:"ap-south-1",
+                s3Url:"https://my-supermarket-items.s3.ap-south-1.amazonaws.com"
+            })
+    
+            reactS3.uploadFile(this.state.image,this.state.image.name.replace('.jpg', ''))
+            .then(data => {
+                console.log('Upload Response:', data);
+                // Check if the response is ok
+                if (data.status >= 200 && data.status < 300) {
+                    console.log('File uploaded successfully:', data);
+                } else {
+                    console.error('Upload failed:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Error during upload:', error);
+            });
+            
+            // window.location = '/addproduct';
+
         } catch (error) {
             console.error("There was an error!", error);
         }
+
     };
 
     handleChange = (e) => {
@@ -35,6 +62,12 @@ class AddProduct extends Component {
         }
         this.setState({ product });
     };
+
+    handleImage = (e) => {
+        let image = e.target.files[0]
+        this.setState({image})
+    }
+
 
     render() {
         return (
@@ -117,7 +150,11 @@ class AddProduct extends Component {
                             name="supplier_id"
                         />
                     </div>
-                    {this.state.product.brand !== "" && this.state.product.name !== "" && this.state.product.supplier_id > 0 &&
+                    <div>
+                        <input  style={{padding: "10px 15px",borderRadius: "5px",border: "1px solid #ccc",
+                                backgroundColor: "#f9f9f9",cursor: "pointer",fontSize: "16px",color: "#333"}} type="file" onChange={this.handleImage}></input>
+                    </div>
+                    {this.state.product.brand !== "" && this.state.product.name !== "" && this.state.image && this.state.product.supplier_id > 0 &&
                         <button type="submit" className="btn btn-primary">Submit</button>                    
                     }
                 </form>

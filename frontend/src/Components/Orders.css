@@ -1,0 +1,51 @@
+/* Center the table container with a maximum width */
+.table-container {
+    width: 80%; /* Reduce the width of the container */
+    max-width: 800px; /* Set a maximum width */
+    margin: 50px auto; /* Center the container with margin */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Style the table */
+.table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Remove gaps between cells */
+}
+
+/* Style the table header */
+.table thead th {
+    background-color: #0c6209; /* Blue header background */
+    color: white; /* White text */
+    padding: 10px; /* Padding inside header cells */
+    text-align: left; /* Align text to the left */
+    border-bottom: 2px solid #ddd; /* Bottom border */
+}
+
+/* Style the table rows and cells */
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Alternating row colors */
+}
+
+.table tbody td {
+    padding: 10px; /* Padding inside table cells */
+    border-bottom: 1px solid #ddd; /* Bottom border for cells */
+}
+
+/* Style the table rows on hover */
+.table tbody tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .table-container {
+        width: 95%; /* Increase width for smaller screens */
+    }
+
+    .table thead th, .table tbody td {
+        padding: 8px; /* Reduce padding on smaller screens */
+    }
+}

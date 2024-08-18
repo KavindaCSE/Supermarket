@@ -25,6 +25,7 @@ class orders(BaseModel):
     no_of_items : int
     Total_price : float
     user_id : int
+    status:str
 
 
 class Users(BaseModel):
@@ -67,3 +68,7 @@ class review(BaseModel):
     product_id : int
     feedback : str
            
+class email(BaseModel):
+    email_address : list[str]
+    subject : str
+    message : str           

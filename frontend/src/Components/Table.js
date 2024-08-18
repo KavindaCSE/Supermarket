@@ -12,9 +12,9 @@ class Table extends Component {
         afterOrder:[],
         activeIndex:0,
         changes:{},
-        order:{"no_of_items":0,"Total_price":0,"user_id":localStorage.getItem("id")},
+        order:{"no_of_items":0,"Total_price":0,"user_id":localStorage.getItem("id"),"status":"Pending"},
         no_of_item:0,
-        items:["All","Youghurt","Butter","Cheese","Biscuit","Chocolate","Soft_drink","Oats","Noodles","Ice_cream","Face_wash"]
+        items:["All","Youghurt","Butter","Cheese","Biscuit","Chocolate","Soft_drink","Oats","Noodles","Ice_cream","Face_wash","Powder"]
     }
 
     async componentDidMount() {
