@@ -5,13 +5,13 @@ import string
 from nltk import PorterStemmer
 import pickle
 
-vocab = pd.read_csv('D:/Python/fastApiReact/Review_Products/static/Model/vocabulary.txt',header=None)
+vocab = pd.read_csv('D:/Python/fastApiReact/ReviewProducts/static/Model/vocabulary.txt',header=None)
 tokens = vocab[0].tolist()
 
-with open('D:/Python/fastApiReact/Review_Products/static/Model/corpora/stopwords/english','r') as file:
+with open('D:/Python/fastApiReact/ReviewProducts/static/Model/corpora/stopwords/english','r') as file:
     sw = file.read().splitlines()
 
-with open('D:/Python/fastApiReact/Review_Products/static/Model/model.pickle','rb') as f:
+with open('D:/Python/fastApiReact/ReviewProducts/static/Model/model.pickle','rb') as f:
     model = pickle.load(f)
 
 ps = PorterStemmer()    
