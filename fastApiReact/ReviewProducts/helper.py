@@ -8,10 +8,10 @@ import pickle
 vocab = pd.read_csv('./ReviewProducts/Static/Model/vocabulary.txt',header=None)
 tokens = vocab[0].tolist()
 
-with open('./ReviewProducts/static/Model/corpora/stopwords/english','r') as file:
+with open('./ReviewProducts/Static/Model/corpora/stopwords/english','r') as file:
     sw = file.read().splitlines()
 
-with open('./ReviewProducts/static/Model/model.pickle','rb') as f:
+with open('./ReviewProducts/Static/Model/model.pickle','rb') as f:
     model = pickle.load(f)
 
 ps = PorterStemmer()    
