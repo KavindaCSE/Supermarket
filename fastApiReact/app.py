@@ -20,7 +20,7 @@ model.Base.metadata.create_all(bind=engine)
 
 # adding cors url
 origins = [
-    'http://localhost:3000'
+    '*'
 ]
 
 
