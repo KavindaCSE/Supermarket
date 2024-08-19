@@ -2,16 +2,13 @@ from fastapi import FastAPI,Depends
 from components import model,schema,hashing,token
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
+from sqlalchemy import distinct
 from components.database import engine,get_db
 from fastapi.middleware.cors import CORSMiddleware 
 from ReviewProducts.helper import preprocessing,vectorizer,predict
 from dotenv import load_dotenv
 
-import boto3
-import os
-
 load_dotenv()
-
 
 app = FastAPI()
 
@@ -22,7 +19,6 @@ model.Base.metadata.create_all(bind=engine)
 origins = [
     '*'
 ]
-
 
 
 #add midldleware
@@ -104,6 +100,13 @@ def update_all_products(request:schema.changesList,db:Session = Depends(get_db))
 def high_revenue_products(db:Session = Depends(get_db)):
     products = db.query(model.Products).order_by(model.Products.revenue.desc()).limit(9).all()
     return products
+
+@app.get('/getuniqueproduct',tags=["products"])
+def get_unique_products(db:Session = Depends(get_db)):
+    products = db.query(distinct(model.Products.name)).all()
+    unique_product_names = [name[0] for name in products]
+    return unique_product_names  
+
 
 @app.delete('/product/{id}',tags=["product"])
 def delete_product(id : int , db:Session = Depends(get_db)):

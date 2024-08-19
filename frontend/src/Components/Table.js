@@ -14,13 +14,16 @@ class Table extends Component {
         changes:{},
         order:{"no_of_items":0,"Total_price":0,"user_id":localStorage.getItem("id"),"status":"Pending"},
         no_of_item:0,
-        items:["All","Youghurt","Butter","Cheese","Biscuit","Chocolate","Soft_drinks","Oats","Noodles","Ice_cream","Face_wash","Powder","Sauce"]
+        items:["All"]
     }
 
     async componentDidMount() {
         try {
+            
             const { data: products } = await axios.get('/products');
-            this.setState({ products :products, allProducts:products ,afterOrder:products});
+            const {data:item} = await axios.get('/getuniqueproduct')
+            const items = [...this.state.items,...item]
+            this.setState({ products :products, allProducts:products ,afterOrder:products,items});
         } catch (error) {
             alert("Error")
         }
