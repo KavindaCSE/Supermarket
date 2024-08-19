@@ -18,8 +18,9 @@ jobs:
         port: 22
         script: |
           cd /home/ubuntu/Supermarket
-          git pull origin main
           git status
+          git reset HEAD --hard
+          git pull origin main
           cd /home/ubuntu/Supermarket/frontend && npm install
           cd /home/ubuntu/Supermarket/frontend && npm run build
           sudo systemctl restart nginx
