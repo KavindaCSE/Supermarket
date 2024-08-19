@@ -192,6 +192,7 @@ def getsupplier(product_id: int, db: Session = Depends(get_db)):
     
 @app.post('/neworder',tags=["orders"])
 def neworder(request : schema.orders , db:Session = Depends(get_db)):
+    print(request)
     new_order = model.Orders(no_of_items = request.no_of_items, Total_price = request.Total_price , user_id = request.user_id,status=request.status) 
     db.add(new_order)
     db.commit()
