@@ -1,0 +1,28 @@
+name: Deploy
+
+# Controls when the action will run. 
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:       
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER_NAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /home/ubuntu/Supermarket
+          git status
+          git reset HEAD --hard
+          git pull origin main
+          cd /home/ubuntu/Supermarket/frontend && npm install
+          cd /home/ubuntu/Supermarket/frontend && npm run build
+          sudo systemctl restart nginx
+          sudo systemctl reload nginx
+          sudo systemctl restart supermarketbackend
