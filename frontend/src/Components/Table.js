@@ -147,7 +147,7 @@ class Table extends Component {
                                                 <h2>{product.name}</h2>
                                                 <h4>ID : {product.id}</h4>
                                                 <p>Price : Rs. {product.unit_price}.00</p>  
-                                                {(product.name === "Vegetables") ?  
+                                                {(product.name === "Vegetables" || "Fruits") ?  
                                                     <p>{product.brand}</p>:
                                                     <p>Brand : {product.brand} </p>
                                                 }                                          
