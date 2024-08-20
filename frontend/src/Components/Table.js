@@ -146,8 +146,11 @@ class Table extends Component {
                                                 <img src={`https://my-supermarket-items.s3.ap-south-1.amazonaws.com/${product.brand}_${product.name}.jpg`} alt="Products" />
                                                 <h2>{product.name}</h2>
                                                 <h4>ID : {product.id}</h4>
-                                                <p>Price : Rs. {product.unit_price}.00</p>
-                                                <p>Brand : {product.brand}</p>                                            
+                                                <p>Price : Rs. {product.unit_price}.00</p>  
+                                                {(product.name === "Vegetables") ?  
+                                                    <p>{product.brand}</p>:
+                                                    <p>Brand : {product.brand} </p>
+                                                }                                          
                                                 <p>Quantity in Stock : {product.quantity_in_stock}</p>
                                                 {this.props.user.post === "Admin" && (
                                                     <>
