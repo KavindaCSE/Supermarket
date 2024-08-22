@@ -14,7 +14,8 @@ class Table extends Component {
         changes:{},
         order:{"no_of_items":0,"Total_price":0,"user_id":localStorage.getItem("id"),"status":"Pending"},
         no_of_item:0,
-        items:["All"]
+        items:["All"],
+        searchItem:""
     }
 
     async componentDidMount() {
@@ -104,7 +105,7 @@ class Table extends Component {
     }
 
     render() {
-        
+        console.log(this.state.seachItem)
         return (
             <>
                 <div className="container">
@@ -128,6 +129,18 @@ class Table extends Component {
 
                         {/* Right side product details */}
                         <div className="content"  style={{width: "80%",position: "absolute", right: 0 ,marginLeft:"10%"}}>
+                        <form>
+                            <div className="mb-3">
+                                <label htmlFor="search" className="form-label">Search here</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    id="searchItem" 
+                                    value={this.state.searchItem}
+                                    onChange={(e) => {this.setState({searchItem:e.currentTarget.value})}}
+                                    />
+                            </div>
+                        </form>    
                         {this.props.user.post === "Customer" &&
                             <div className="card" style={{width: "15rem", marginLeft:"400px" , marginTop:"15px" ,marginBottom:"15px"}}>
                                 <div className="card-body">
@@ -139,7 +152,11 @@ class Table extends Component {
                             </div>}
                         <div className="white-content">
                             <div className="goods-container">
-                                {this.state.products.map((product,index) => {
+                                {this.state.products.filter((product) => {
+                                    return this.state.searchItem.toLowerCase() === "" ?
+                                        product : product.name.toLowerCase().includes(this.state.searchItem.toLowerCase())
+                                }
+                                ).map((product,index) => {
                                     if (product.quantity_in_stock) {
                                         return (
                                             <div key={product.id} className="goods-box">
