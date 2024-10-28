@@ -19,7 +19,6 @@ jobs:
         script: |
           cd /home/ubuntu/Supermarket
           git status
-          git reset HEAD --hard
           git pull origin main
           cd /home/ubuntu/Supermarket/frontend && npm install
           cd /home/ubuntu/Supermarket/frontend && npm run build
